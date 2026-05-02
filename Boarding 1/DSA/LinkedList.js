@@ -1,7 +1,5 @@
-// create linked list and remove duplicate
-// remove odd value nodes from linked list object - could not do it outside class.
 // insert a node to sorted linked list
-// Merge two linked list and sort it merge sort or other
+// Merge two linked list and sort -  it merge sort or other
 // sum of first 2 and last 2 values in linkedList
 // Delete kth element from Linked List from the end — practical
 // Find and delete 3rd element from end of linked list
@@ -108,14 +106,14 @@ class LinkedList {
     }
     prev.next = current.next;
   }
-  findMiddle() {
-    let slow = this.head;
-    let fast = this.head;
-    while (fast && fast.next) {
-      slow = slow.next;
-      fast = fast.next.next;
+  findMiddle(){
+    let slow = this.head
+    let fast  = this.head
+    while(fast && fast.next){
+        slow = slow.next
+        fast = fast.next.next
     }
-    return slow.value;
+    return slow.value
   }
   makeCircular() {
     let current = this.head;
@@ -130,7 +128,7 @@ class LinkedList {
     while (fast && fast.next) {
       slow = slow.next;
       fast = fast.next.next;
-      if (slow === fast) {
+      if (slow === fast) {  
         return true;
       }
     }
@@ -176,8 +174,62 @@ class LinkedList {
     }
   }
   removeDuplicates(){
-    
+    if(!this.head)return
+    let seen  = new Set()
+    let current = this.head
+    let prev = null
+
+    while(current){
+        if(seen.has(current.value)){
+            prev.next = current.next
+        }else{
+            seen.add(current.value)
+            prev = current
+        }
+        current = current.next
+    }
   }
+
+  getMiddle(head){
+    let slow = head
+    let fast  = head.next
+    while(fast && fast.next){
+        slow = slow.next
+        fast = fast.next.next
+    }
+    return slow
+  }
+  sortedMerge(l1,l2){
+    if(!l1)return l2
+    if(!l2)return l1
+    if(l1.value < l2.value){
+        l1.next = this.sortedMerge(l1.next,l2)
+        return l1
+    }else{
+        l2.next = this.sortedMerge(l1,l2.next)
+        return l2
+    }
+  }
+
+  mergeSort(head = this.head){
+    if(!head || !head.next) return head
+
+    const mid = this.getMiddle(head)
+    // leftHead = head  --left head is main head mid fine with find middle and right head is mid's next value
+    const rightHead = mid.next
+
+    mid.next = null 
+
+    const left = this.mergeSort(head)
+    const right = this.mergeSort(rightHead)
+
+    return this.sortedMerge(left,right)
+  }
+
+  sort(){
+    this.head = this.mergeSort(this.head)
+  }
+
   print() {
     let current = this.head
     while(current){
@@ -197,3 +249,10 @@ ll.addFirst(1)
 
 // ll.removeOdd()
 ll.print()
+// ll.removeDuplicates()
+console.log('middle ' ,ll.findMiddle())
+
+ll.sort()
+
+ll.print()
+console.log('middle ' ,ll.findMiddle())
