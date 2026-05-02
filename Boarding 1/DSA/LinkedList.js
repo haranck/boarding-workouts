@@ -1,6 +1,4 @@
-// insert a node to sorted linked list
-// Merge two linked list and sort -  it merge sort or other
-// sum of first 2 and last 2 values in linkedList
+
 // Delete kth element from Linked List from the end — practical
 // Find and delete 3rd element from end of linked list
 // delete k th from end of a linked list — practical
@@ -145,7 +143,7 @@ class LinkedList {
     }
     this.head = prev
   }
-  merge(otherList){
+  mergeLists(otherList){
     if(!this.head){
         this.head = otherList.head
         return
@@ -230,6 +228,35 @@ class LinkedList {
     this.head = this.mergeSort(this.head)
   }
 
+  // sum of first 2 and last 2 values in linkedList
+
+  sumFirstLastTwo(){
+    if(!this.head)return 0
+    let firstSum = 0
+    let lastSum = 0
+
+    let count  =0
+    let current = this.head
+    while(current){
+        count++
+        current = current.next
+    }
+    current = this.head
+    let index = 0
+    while(current){
+        if(index < 2){
+            firstSum += current.value
+        }
+
+        if(index >= count-2){
+            lastSum += current.value
+        }
+        current = current.next
+        index++
+    }
+    return firstSum+lastSum
+  }
+
   print() {
     let current = this.head
     while(current){
@@ -246,13 +273,28 @@ ll.addFirst(3)
 ll.addFirst(4)
 ll.addFirst(2)
 ll.addFirst(1)
+ll.addLast(100)
+ll.addFirst(50)
+ll.addAt(1,1000)
+ll.removeAt(1)
+ll.removeFirst()
+ll.removeLast()
 
-// ll.removeOdd()
+const l2 = new LinkedList()
+l2.addFirst(10)
+l2.addFirst(20)
+l2.addFirst(30)
+l2.addFirst(40)
+l2.addFirst(20)
+l2.addFirst(10)
+
+
 ll.print()
-// ll.removeDuplicates()
 console.log('middle ' ,ll.findMiddle())
 
+ll.mergeLists(l2)
 ll.sort()
-
 ll.print()
+
 console.log('middle ' ,ll.findMiddle())
+console.log('first and last two sum ',ll.sumFirstLastTwo())
