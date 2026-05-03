@@ -1,8 +1,4 @@
 
-// Delete kth element from Linked List from the end — practical
-// Find and delete 3rd element from end of linked list
-// delete k th from end of a linked list — practical
-
 class Node {
   constructor(value) {
     this.value = value;
@@ -256,6 +252,42 @@ class LinkedList {
     }
     return firstSum+lastSum
   }
+  deleteKthFromLast(k){
+    let length  = 0
+    let current = this.head
+    while(current){
+        length++
+        current = current.next
+    }
+    
+    let target = length - k
+
+    if(target === 0){
+        this.head = this.head.next
+        return
+    }
+
+    current = this.head
+    for(let  i = 0 ; i < target - 1 ; i++){
+        current = current.next
+    }
+    current.next = current.next.next
+  }
+  delete3rdFromLast(){
+    let length = 0
+    let current =  this.head
+    while(current){
+        length++
+        current = current.next
+    }
+
+    let target = length - 3
+    current = this.head
+    for(let i = 0 ; i<target -1;i++){
+        current = current.next
+    }
+    current.next = current.next.next
+  }
 
   print() {
     let current = this.head
@@ -298,3 +330,7 @@ ll.print()
 
 console.log('middle ' ,ll.findMiddle())
 console.log('first and last two sum ',ll.sumFirstLastTwo())
+
+// ll.deleteKthFromLast(2)
+ll.delete3rdFromLast()
+ll.print()
