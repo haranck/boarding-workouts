@@ -12,7 +12,7 @@ function reverseInPlace(str){
     }
     return str
 }
-console.log(reverseInPlace('haran'.split('')))
+// console.log(reverseInPlace('haran'.split('')))
 
 
 // Remove duplicates in string using stack
@@ -33,7 +33,7 @@ function removeDuplicates(str){
     return stack.join('')
 
 }
-console.log(removeDuplicates(str))
+// console.log(removeDuplicates(str))
 
 
 // sort a stack using temporary stack
@@ -49,4 +49,83 @@ function sortStack(stack){
     }
     return tempStack
 }
-console.log(sortStack([8,6,4,7,5,2,1,3]))
+// console.log(sortStack([8,6,4,7,5,2,1,3]))
+
+
+// stack using queue
+
+class Stack {
+    constructor(){
+        this.q1 = []
+        this.q2 = []
+    }
+    push(value){
+        while(this.q1.length){
+            this.q2.push(this.q1.shift())
+        }
+        this.q1.push(value)
+        while(this.q2.length){
+            this.q1.push(this.q2.shift())
+        }
+    }
+    pop(){
+        return this.q1.shift()
+    }
+    peek(){
+        return this.q1[0]
+    }
+    print(){
+        console.log("stack",this.q1)
+    }
+}
+
+const stack  = new Stack()
+stack.push(10)
+stack.push(20)
+stack.push(30)
+stack.push(40)
+
+stack.print()
+
+//Queue using stack
+
+
+class Queue {
+    constructor(){
+        this.stack1 = []
+        this.stack2 = []
+    }
+    enqueue(value){
+        this.stack1.push(value)
+    }
+    dequeue(){
+        if(this.stack2.length === 0){
+            while(this.stack1.length){
+                this.stack2.push(this.stack1.pop())
+            }
+        }
+        return this.stack2.pop()
+    }
+    front(){
+        if(this.stack2.length === 0){
+            while(this.stack1.length){
+                this.stack2.push(this.stack1.pop())
+            }
+        }
+        return this.stack2[this.stack2.length-1]
+    }
+    print(){
+        console.log('Queue ',[...this.stack2].concat(this.stack1))
+    }
+}
+
+const q = new Queue()
+q.enqueue(1)
+q.enqueue(2)
+q.enqueue(3)
+q.enqueue(4)
+q.enqueue(5)
+
+q.print()
+
+console.log(q.front())
