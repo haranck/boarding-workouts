@@ -318,7 +318,6 @@ ll.addFirst(3);
 ll.addFirst(4);
 ll.addFirst(2);
 
-
 const l2 = new LinkedList();
 l2.addFirst(10);
 l2.addFirst(20);
@@ -339,5 +338,5 @@ console.log("first and last two sum ", ll.sumFirstLastTwo());
 
 // ll.deleteKthFromLast(2)
 // ll.delete3rdFromLast();
-ll.addPairsSumBetweenPairs()
+ll.addPairsSumBetweenPairs();
 ll.print();

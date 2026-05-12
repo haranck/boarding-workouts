@@ -12,7 +12,7 @@ function reverseInPlace(str){
     }
     return str
 }
-// console.log(reverseInPlace('haran'.split('')))
+console.log(reverseInPlace('haran'.split('')))
 
 
 // Remove duplicates in string using stack
@@ -33,14 +33,14 @@ function removeDuplicates(str){
     return stack.join('')
 
 }
-// console.log(removeDuplicates(str))
+console.log(removeDuplicates(str))
 
 
 // sort a stack using temporary stack
 
 function sortStack(stack){
     let tempStack = []
-    while(stack.length){ 
+    while(stack.length){
         let temp = stack.pop()
         while(tempStack.length > 0 && tempStack[tempStack.length -1 ] > temp){
             stack.push(tempStack.pop())
@@ -49,7 +49,8 @@ function sortStack(stack){
     }
     return tempStack
 }
-// console.log(sortStack([8,6,4,7,5,2,1,3]))
+
+console.log(sortStack([8,6,4,7,5,2,1,3]))
 
 
 // stack using queue
@@ -128,4 +129,73 @@ q.enqueue(5)
 
 q.print()
 
-console.log(q.front())
+
+
+// stack using linked list 
+
+class Node {
+    constructor(value){
+        this.value = value
+        this.next = null
+    }
+}
+
+class StackLinkedList {
+    constructor(){
+        this.head = null
+    }
+    push(value){
+        let newNode = new Node(value)
+
+        newNode.next = this.head
+        this.head = newNode
+    }
+    pop(){
+        if(this.head === null) return 'stack is Empty'
+        let poped = this.head.value
+        this.head = this.head.next
+        return poped
+    }
+    peek(){
+        return this.head.value
+    }
+    print(){
+        let current = this.head
+        let result = ''
+        while(current){
+            result+= current.value + " -> "
+            current = current.next
+        }
+        result+=null
+        console.log(result)
+    }
+}
+
+const stackLL = new StackLinkedList()
+stackLL.push(1)
+stackLL.push(2)
+stackLL.push(3)
+stackLL.push(4)
+
+stackLL.print()
+
+
+//reverse string using stack
+
+const string = "hello good night"
+ 
+function reverseString(str){
+    let splits = str.split(' ')
+    let stack = []
+    for(let word of splits){
+        stack.push(word)
+    }
+    let result = ''
+    while(stack.length){
+        let current = stack.pop()
+        result += " " +current
+    }
+    return result.trim()
+
+}
+console.log(reverseString(string))
