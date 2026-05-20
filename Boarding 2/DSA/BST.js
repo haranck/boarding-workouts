@@ -43,6 +43,13 @@ class BST {
       console.log(node.data);
     }
   }
+  preOrder(node = this.root){
+    if(node){
+        console.log(node.data)
+        this.preOrder(node.left)
+        this.preOrder(node.right)
+    }
+  }
 }
 
 const tree = new BST();
@@ -53,6 +60,7 @@ tree.insert(12);
 tree.insert(8);
 
 tree.postOrder();
+tree.preOrder()
 
 //     10
 //    /  \
