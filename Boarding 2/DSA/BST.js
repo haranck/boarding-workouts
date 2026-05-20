@@ -30,7 +30,7 @@ class BST {
     } else {
       if (!node.right) {
         node.right = newNode;
-        return;
+        return; 
       }
       this.insertNode(node.right, newNode);
     }
