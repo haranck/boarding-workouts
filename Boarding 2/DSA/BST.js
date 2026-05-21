@@ -1,4 +1,3 @@
-
 // Binary Search Tree Implementation BST
 
 class Node {
@@ -9,7 +8,7 @@ class Node {
   }
 }
 class BST {
-  constructor() {    
+  constructor() {
     this.root = null;
   }
   insert(value) {
@@ -35,7 +34,21 @@ class BST {
       this.insertNode(node.right, newNode);
     }
   }
-  
+  leftSum() {
+    if (!this.root || !this.root.left) return 0;
+    return this.sum(this.root.left);
+  }
+  height(node = this.root) {
+    if (!node) return 0;
+    let left = this.height(node.left);
+    let right = this.height(node.right);
+    return Math.max(left, right) + 1;
+  }
+  leftHeight() {
+    if (!this.root || !this.root.left) return 0;
+    return this.height(this.root.left);
+  }
+
   postOrder(node = this.root) {
     if (node) {
       this.postOrder(node.right);
@@ -43,11 +56,11 @@ class BST {
       console.log(node.data);
     }
   }
-  preOrder(node = this.root){
-    if(node){
-        console.log(node.data)
-        this.preOrder(node.left)
-        this.preOrder(node.right)
+  preOrder(node = this.root) {
+    if (node) {
+      console.log(node.data);
+      this.preOrder(node.left);
+      this.preOrder(node.right);
     }
   }
 }
@@ -60,7 +73,10 @@ tree.insert(12);
 tree.insert(8);
 
 tree.postOrder();
-tree.preOrder()
+tree.preOrder();
+
+console.log("Height:", tree.height());
+console.log("Left Height:", tree.leftHeight());
 
 //     10
 //    /  \
