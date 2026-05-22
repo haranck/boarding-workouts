@@ -1,66 +1,60 @@
 // Binary Search Tree Implementation BST
 
 class Node {
-  constructor(value) {
-    this.data = value;
-    this.right = null;
-    this.left = null;
+  constructor(value){
+    this.data = value
+    this.left = null
+    this.right = null
   }
 }
+
 class BST {
-  constructor() {
-    this.root = null;
+  constructor(){
+    this.root = null
   }
-  insert(value) {
-    let newNode = new Node(value);
-    if (!this.root) {
-      this.root = newNode;
-      return;
+  insert(value){
+    let newNode = new Node(value)
+    if(!this.root){
+      this.root = newNode
+      return 
     }
-    this.insertNode(this.root, newNode);
+    this.insertNode(this.root,newNode)
   }
-  insertNode(node, newNode) {
-    if (node.data > newNode.data) {
-      if (!node.left) {
-        node.left = newNode;
-        return;
+  insertNode(node,newNode){
+    if(node.data > newNode.data){
+      if(!node.left){
+        node.left = newNode
+        return
       }
-      this.insertNode(node.left, newNode);
-    } else {
-      if (!node.right) {
-        node.right = newNode;
-        return;
+      this.insertNode(node.left,newNode)
+    }else{
+      if(!node.right){
+        node.right = newNode
+        return
       }
-      this.insertNode(node.right, newNode);
+      this.insertNode(node.right,newNode)
     }
-  }
-  leftSum() {
-    if (!this.root || !this.root.left) return 0;
-    return this.sum(this.root.left);
-  }
-  height(node = this.root) {
-    if (!node) return 0;
-    let left = this.height(node.left);
-    let right = this.height(node.right);
-    return Math.max(left, right) + 1;
-  }
-  leftHeight() {
-    if (!this.root || !this.root.left) return 0;
-    return this.height(this.root.left);
   }
 
-  postOrder(node = this.root) {
-    if (node) {
-      this.postOrder(node.right);
-      this.postOrder(node.left);
-      console.log(node.data);
+  inorder(node = this.root){
+    if(node){
+      this.inorder(node.left)
+      console.log(node.data)
+      this.inorder(node.right)
     }
   }
-  preOrder(node = this.root) {
-    if (node) {
-      console.log(node.data);
-      this.preOrder(node.left);
-      this.preOrder(node.right);
+  postOrder(node = this.root){
+    if(node){
+      this.postOrder(node.left)
+      this.postOrder(node.right)
+      console.log(node.data)
+    }
+  }
+  preOrder(node = this.root){
+    if(node){
+      console.log(node.data)
+      this.preOrder(node.left)
+      this.preOrder(node.right)
     }
   }
 }
@@ -72,11 +66,17 @@ tree.insert(9);
 tree.insert(12);
 tree.insert(8);
 
+console.log('inorder ')
+tree.inorder()
+
+console.log('postorder ')
 tree.postOrder();
+
+console.log('preorder ')
 tree.preOrder();
 
-console.log("Height:", tree.height());
-console.log("Left Height:", tree.leftHeight());
+// console.log("Height:", tree.height());
+// console.log("Left Height:", tree.leftHeight());
 
 //     10
 //    /  \
