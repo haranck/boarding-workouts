@@ -35,6 +35,16 @@ class BST {
       this.insertNode(node.right,newNode)
     }
   }
+  search(node = this.root,value){
+    if(!node)return false
+    if(node.data === value){
+      return true
+    }else if (node.data > value){
+      return this.search(node.left,value)
+    }else{
+      return this.search(node.right,value)
+    }
+  }
 
   inorder(node = this.root){
     if(node){
@@ -74,6 +84,8 @@ tree.postOrder();
 
 console.log('preorder ')
 tree.preOrder();
+
+console.log('search',tree.search(10))
 
 // console.log("Height:", tree.height());
 // console.log("Left Height:", tree.leftHeight());
