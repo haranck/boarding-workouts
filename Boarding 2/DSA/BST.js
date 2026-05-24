@@ -1,70 +1,70 @@
 // Binary Search Tree Implementation BST
 
 class Node {
-  constructor(value){
-    this.data = value
-    this.left = null
-    this.right = null
+  constructor(value) {
+    this.data = value;
+    this.left = null;
+    this.right = null;
   }
 }
 
 class BST {
-  constructor(){
-    this.root = null
+  constructor() {
+    this.root = null;
   }
-  insert(value){
-    let newNode = new Node(value)
-    if(!this.root){
-      this.root = newNode
-      return 
+  insert(value) {
+    let newNode = new Node(value);
+    if (!this.root) {
+      this.root = newNode;
+      return;
     }
-    this.insertNode(this.root,newNode)
+    this.insertNode(this.root, newNode);
   }
-  insertNode(node,newNode){
-    if(node.data > newNode.data){
-      if(!node.left){
-        node.left = newNode
-        return
+  insertNode(node, newNode) {
+    if (node.data > newNode.data) {
+      if (!node.left) {
+        node.left = newNode;
+        return;
       }
-      this.insertNode(node.left,newNode)
-    }else{
-      if(!node.right){
-        node.right = newNode
-        return
+      this.insertNode(node.left, newNode);
+    } else {
+      if (!node.right) {
+        node.right = newNode;
+        return;
       }
-      this.insertNode(node.right,newNode)
+      this.insertNode(node.right, newNode);
     }
   }
-  search(node = this.root,value){
-    if(!node)return false
-    if(node.data === value){
-      return true
-    }else if (node.data > value){
-      return this.search(node.left,value)
-    }else{
-      return this.search(node.right,value)
+  search(node = this.root, value) {
+    if (!node) return false;
+    if (node.data === value) {
+      return true;
+    } else if (node.data > value) {
+      return this.search(node.left, value);
+    } else {
+      return this.search(node.right, value);
     }
   }
 
-  inorder(node = this.root){
-    if(node){
-      this.inorder(node.left)
-      console.log(node.data)
-      this.inorder(node.right)
+  inorder(node = this.root) {
+    if (node) {
+      this.inorder(node.left);
+      console.log(node.data);
+      this.inorder(node.right);
     }
   }
-  postOrder(node = this.root){
-    if(node){
-      this.postOrder(node.left)
-      this.postOrder(node.right)
-      console.log(node.data)
+  postOrder(node = this.root) {
+    if (node) {
+      this.postOrder(node.left);
+      this.postOrder(node.right);
+      console.log(node.data);
     }
   }
-  preOrder(node = this.root){
-    if(node){
-      console.log(node.data)
-      this.preOrder(node.left)
-      this.preOrder(node.right)
+  preOrder(node = this.root) {
+    if (node) {
+      console.log(node.data);
+      this.preOrder(node.left);
+      this.preOrder(node.right);
     }
   }
 }
@@ -76,16 +76,16 @@ tree.insert(9);
 tree.insert(12);
 tree.insert(8);
 
-console.log('inorder ')
-tree.inorder()
+console.log("inorder ");
+tree.inorder();
 
-console.log('postorder ')
+console.log("postorder ");
 tree.postOrder();
 
-console.log('preorder ')
+console.log("preorder ");
 tree.preOrder();
 
-console.log('search',tree.search(10))
+console.log("search", tree.search(10));
 
 // console.log("Height:", tree.height());
 // console.log("Left Height:", tree.leftHeight());
