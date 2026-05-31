@@ -49,16 +49,20 @@ class BST {
     return this.min(node.left);
   }
   delete(value) {
+    if (!this.search(this.root, value)) {
+      console.log("Value not found");
+      return;
+    }
     this.root = this.deleteNode(this.root, value);
   }
   deleteNode(node, value) {
     if (!node) return;
     if (node.data > value) {
       node.left = this.deleteNode(node.left, value);
-    } else if (node.dta < value) {
+    } else if (node.data < value) {
       node.right = this.deleteNode(node.right, value);
     } else {
-      if (!node.right && !node.left) return;
+      if (!node.right && !node.left) return null;
       if (!node.right) return node.left;
       if (!node.left) return node.right;
 
@@ -132,6 +136,65 @@ class BST {
       this.isValidBST(node.right, node.data, max)
     );
   }
+  kthSmallest(k) {
+    let result = null;
+    let count = 0;
+    function inOrder(node) {
+      if (!node || count >= k) return;
+      inOrder(node.left);
+      count++;
+      if (count === k) {
+        result = node.data;
+        return;
+      }
+      inOrder(node.right);
+    }
+    inOrder(this.root);
+    return result;
+  }
+  kthLargest(k) {
+    let result = null;
+    let count = 0;
+    function inOrder(node) {
+      if (!node || count >= k) return;
+      inOrder(node.right);
+      count++;
+      if (count === k) {
+        result = node.data;
+        return;
+      }
+      inOrder(node.left);
+    }
+    inOrder(this.root);
+    return result;
+  }
+  deleteKthLargest(k) {
+    let result = null;
+    let count = 0;
+    function inOrder(node) {
+      if (!node || count >= k) return;
+      inOrder(node.right);
+      count++;
+      if (count === k) {
+        result = node.data;
+        return;
+      }
+      inOrder(node.left);
+    }
+    inOrder(this.root);
+    if (result !== null) {
+      this.delete(result);
+      return result;
+    }
+  }
+  deleteSecondLargest() {
+    const value = this.kthLargest(2);
+    if (value === null) {
+      console.log("Tree doesnt have second largest");
+      return;
+    }
+    this.delete(value);
+  }
 
   levelOrder() {
     let queue = [];
@@ -186,7 +249,9 @@ tree.insert(8);
 
 console.log("InOrder");
 tree.inOrder();
-
+tree.delete(111);
+console.log("after delete");
+tree.inOrder();
 console.log("Sum:", tree.sum());
 console.log("Left Sum:", tree.leftSum());
 console.log("Height:", tree.height());
@@ -199,6 +264,11 @@ console.log("Max Depth:", tree.maxDepth());
 console.log("Depth:", tree.depth());
 console.log("Valid BST:", tree.isValidBST());
 console.log("Perfect Tree:", tree.isPerfect());
+console.log("Kth Smallest", tree.kthSmallest(1));
+console.log("Kth Largest", tree.kthLargest(1));
+// tree.deleteKthLargest(1)
+// tree.deleteSecondLargest()
+// tree.inOrder()
 
 //     10
 //    /  \
