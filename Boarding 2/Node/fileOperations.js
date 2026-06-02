@@ -47,7 +47,8 @@ fs.appendFile('input.txt',' Love you',(err)=>{
 //     console.log('file deleted successfully')
 // })
 
-fs.link('input.txt','demo.txt',(err)=>{
-    if(err) throw new Error(err)
-    console.log("hard link created successfully")
-})
+// fs.link('input.txt','demo.txt',(err)=>{
+//     if(err) throw new Error(err)
+//     console.log("hard link created successfully")
+// })
+
