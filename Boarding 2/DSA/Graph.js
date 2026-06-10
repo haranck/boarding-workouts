@@ -84,6 +84,30 @@ class Graph {
         }
         return clone;
     }
+    detectCycle(vertex, visited, parent) {
+        visited.add(vertex);
+        for (let neighbour of this.adjacencyList[vertex]) {
+            if (!visited.has(neighbour)) {
+                if (this.detectCycle(neighbour, visited, vertex)) {
+                    return true;
+                }
+            } else if (neighbour !== parent) {
+                return true;
+            }
+        }
+        return false;
+    }
+    hasCycle() {
+        let visited = new Set();
+        for (let vertex in this.adjacencyList) {
+            if (!visited.has(vertex)) {
+                if (this.detectCycle(vertex, visited, null)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }
 
 const g = new Graph();
@@ -104,8 +128,9 @@ g.bfs("A");
 
 console.log("clone graph");
 const cloneGraph = g.clone();
-// cloneGraph.bfs("A")
 cloneGraph.print();
+
+console.log('has Cycle ? : ',g.hasCycle())
 
 console.log(g.adjacencyList);
 
