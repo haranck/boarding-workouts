@@ -130,7 +130,7 @@ console.log("clone graph");
 const cloneGraph = g.clone();
 cloneGraph.print();
 
-console.log('has Cycle ? : ',g.hasCycle())
+console.log("has Cycle ? : ", g.hasCycle());
 
 console.log(g.adjacencyList);
 
