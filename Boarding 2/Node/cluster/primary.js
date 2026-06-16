@@ -3,37 +3,31 @@ const os = require("os");
 const express = require("express");
 
 if (cluster.isPrimary) {
-  const numCPUs = os.cpus().length;
+    console.log(`primary PID : ${process.pid}`);
+    const numCpus = os.cpus().length;
 
-  console.log(`Primary: ${process.pid}`);
+    for (let i = 0; i < numCpus; i++) {
+        cluster.fork();
+    }
 
-  for (let i = 0; i < numCPUs-8; i++) {
-    cluster.fork();
-  }
-
-  cluster.on("exit", (worker) => {
-    console.log(`Worker ${worker.process.pid} died`);
-    cluster.fork();
-  });
-
+    cluster.on("exit", (worker) => {
+        console.log(`worker ${worker.process.pid} died`);
+        cluster.fork();
+    });
 } else {
+    const app = express();
 
-  const app = express();
+    app.get("/", (req, res) => {
+        let sum = 0;
+        for (let i = 0; i < 1e9; i++) {
+            for (let j = 0; j < 1; j++) {
+                sum += i;
+            }
+        }
+        res.send(`Handled by Worker : ${process.pid} | Sum: ${sum}`);
+    });
 
-  app.get("/", (req, res) => {
-	console.log("Landing:", process.pid);
-    res.send(`Landing Page : Handled by Worker ${process.pid}`);
-  });
-  app.get('/home',(req,res)=>{
-	console.log('Home',process.pid)
-	res.send(`Home Page : Handled by Worker ${process.pid}`);
-  })
-
-  app.get("/crash", (req, res) => {
-    process.exit(1);
-  });
- 
-  app.listen(3000, () => {
-    console.log(`App listening on port 3000 :: Worker PID :${process.pid}`);
-  });
+    app.listen(3000, () =>
+        console.log(`App running on port 3000 | worker PID: ${process.pid}`),
+    );
 }
