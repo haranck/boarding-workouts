@@ -5,7 +5,7 @@ const sumMiddleware = (req, res, next) => {
     let num1 = Number(req.params.num1);
     let num2 = Number(req.params.num2);
 
-    req.var = {
+    res.locals.num = {
         num1,
         num2,
     };
@@ -15,7 +15,7 @@ const sumMiddleware = (req, res, next) => {
 // app.use(sumMiddleware)
 
 app.get("/:num1/:num2", sumMiddleware, (req, res) => {
-    const sum = req.var.num1 + req.var.num2;
+    const sum = res.locals.num.num1 + res.locals.num.num2;
     console.log(sum);
     res.send(`Sum is ${sum}`);
 });
