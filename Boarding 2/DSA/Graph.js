@@ -138,4 +138,4 @@ console.log(g.adjacencyList);
 
 g.print();
 
-// shortest path , weighted graph , has cycle
+// shortest path , weighted graph 
