@@ -108,6 +108,22 @@ class Graph {
         }
         return false;
     }
+    shortestPath(start,target){
+		let visited = new Set()
+		let queue = [[start,[start]]]
+		while(queue.length){
+			let [vertex,path] = queue.shift()
+			if(vertex===target){
+				return path
+			}
+			for(let neighbour of this.adjacencyList[vertex]){
+				if(!visited.has(neighbour)){
+					queue.push([neighbour,[...path,neighbour]])
+					visited.add(neighbour)
+				}
+			}
+		}
+	}
 }
 
 const g = new Graph();
@@ -138,4 +154,4 @@ console.log(g.adjacencyList);
 
 g.print();
 
-// shortest path 
+console.log("shortest Path ",g.shortestPath("A","D"))
