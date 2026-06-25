@@ -60,7 +60,6 @@ class BinaryTree {
     }
     toBST() {
         let bst = new BinaryTree();
-
         let queue = [this.root];
 
         while (queue.length) {
@@ -68,12 +67,8 @@ class BinaryTree {
 
             bst.root = this.insertBST(bst.root, current.data);
 
-            if (current.left) {
-                queue.push(current.left);
-            }
-            if (current.right) {
-                queue.push(current.right);
-            }
+            if (current.left) queue.push(current.left);
+            if (current.right) queue.push(current.right);
         }
         return bst;
     }
@@ -93,5 +88,5 @@ console.log("Binary Tree");
 tree.levelOrder();
 
 console.log("BST");
-const bst  = tree.toBST()
-bst.levelOrder()
+const bst = tree.toBST();
+bst.levelOrder();
