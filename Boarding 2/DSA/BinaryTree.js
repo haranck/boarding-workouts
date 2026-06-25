@@ -48,6 +48,35 @@ class BinaryTree {
             }
         }
     }
+    insertBST(node, value) {
+        if (!node) return new TreeNode(value);
+
+        if (node.data > value) {
+            node.left = this.insertBST(node.left, value);
+        } else {
+            node.right = this.insertBST(node.right, value);
+        }
+        return node;
+    }
+    toBST() {
+        let bst = new BinaryTree();
+
+        let queue = [this.root];
+
+        while (queue.length) {
+            let current = queue.shift();
+
+            bst.root = this.insertBST(bst.root, current.data);
+
+            if (current.left) {
+                queue.push(current.left);
+            }
+            if (current.right) {
+                queue.push(current.right);
+            }
+        }
+        return bst;
+    }
 }
 
 const tree = new BinaryTree();
@@ -60,4 +89,9 @@ tree.insert(5);
 tree.insert(6);
 tree.insert(7);
 
+console.log("Binary Tree");
 tree.levelOrder();
+
+console.log("BST");
+const bst  = tree.toBST()
+bst.levelOrder()
