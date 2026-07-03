@@ -318,3 +318,17 @@ console.log("sumOfLastTwoLevel :", tree.sumOfLastTwoLevel());
 //     8         12
 //    /            \
 //   7              14
+
+
+//if we want to remove duplicates from BST then we can use below function
+
+// function removeDuplicates(node){
+//     if(!node)return 
+//     removeDuplicates(node.left)
+//     if(prev!==node.val){
+//         console.log(node.val)
+//         prev = node.val
+//     }
+//     removeDuplicates(node.right)
+// }
+// removeDuplicates(root)

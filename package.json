@@ -1,9 +1,11 @@
 {
+  "type": "module",
   "dependencies": {
     "express": "^5.2.1",
     "fs": "^0.0.1-security",
     "mongodb": "^7.3.0",
     "mongoose": "^9.7.1",
+    "openai": "^6.45.0",
     "zod": "^4.4.3"
   },
   "devDependencies": {
