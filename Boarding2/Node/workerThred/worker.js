@@ -1,7 +1,10 @@
-const { parentPort } = require("worker_threads");
+const { parentPort, workerData } = require("worker_threads");
+
 let sum = 0;
-for (let i = 0; i < 1e9; i++) {
+console.log(workerData);
+
+for (let i = 0; i < workerData.num; i++) {
     sum += i;
 }
+
 parentPort.postMessage(sum);
-// throw new Error("Something went wrong in worker");

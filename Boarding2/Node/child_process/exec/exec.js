@@ -1,6 +1,6 @@
 const { exec } = require("child_process");
 
-exec("node -v", (error, stdout, stderr) => {
+exec("ls -la", (error, stdout, stderr) => {
     if (error) {
         console.log("Error", error.message);
         return;

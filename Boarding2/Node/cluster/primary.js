@@ -6,7 +6,7 @@ if (cluster.isPrimary) {
     console.log(`primary PID : ${process.pid}`);
     const numCpus = os.cpus().length;
 
-    for (let i = 0; i < numCpus; i++) {
+    for (let i = 0; i < numCpus-8; i++) {
         cluster.fork();
     }
 
@@ -20,7 +20,7 @@ if (cluster.isPrimary) {
     app.get("/", (req, res) => {
         let sum = 0;
         for (let i = 0; i < 1e9; i++) {
-            for (let j = 0; j < 1; j++) {
+            for (let j = 0; j < 10; j++) {
                 sum += i;
             }
         }

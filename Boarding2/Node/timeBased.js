@@ -8,8 +8,6 @@ app.use((req, res, next) => {
     const endTime = new Date();
     startTime.setHours(5, 0, 0, 0);
     endTime.setHours(22, 0, 0, 0);
-    console.log(startTime.toLocaleString());
-    console.log(endTime.toLocaleString());
     if (now >= startTime && now <= endTime) {
         console.log(`[${now.toLocaleString()}] ${req.method} ${req.url}`);
 		fs.writeFile('test.txt',`${req.method} ${req.url}`,(err)=>{
