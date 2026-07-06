@@ -10,7 +10,7 @@ const key = crypto.randomBytes(32);
 let iv = crypto.randomBytes(16);
 
 emitter.on("error", (error) => {
-    console.log(error);
+    //encryption
 
     const cipher = crypto.createCipheriv(algorithm, key, iv);
     let encrypted = cipher.update(error, "utf8", "hex") + cipher.final("hex");
@@ -25,14 +25,34 @@ emitter.on("error", (error) => {
             console.log("file writed on file ecrypted.txt");
         },
     );
+
+    //decryption
+
+    const decipher = crypto.createDecipheriv(algorithm, key, iv);
+    const decrypted = decipher.update(encrypted, "hex", "utf8")+decipher.final('utf8')
+
+    fs.appendFile(
+        "decrypted.txt",
+        `${decrypted} : Time : ${new Date().getHours()}:${new Date().getMinutes()} \n\n`,
+        (error) => {
+            if (error) throw new Error("something went wrong");
+            console.log("file writed on decrypted.txt");
+        },
+    );
 });
 
 app.get("/", (req, res) => {
     try {
-        throw new Error("Something went wrong");
+        throw new Error("Something went wrongsss");
     } catch (error) {
         emitter.emit("error", error.message);
     }
 });
 
 app.listen(3000, () => console.log("server runnning"));
+
+// cipher.update(
+//     "Database Error", // Input
+//     "utf8",           // Input format
+//     "hex"             // Output format
+// );
