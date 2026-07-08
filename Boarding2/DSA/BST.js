@@ -277,12 +277,12 @@ tree.insert(8);
 tree.insert(7);
 tree.insert(14);
 
-// console.log("Level Order")
-// tree.levelOrder()
-// console.log("PreOrder")
-// tree.preOrder()
-// console.log("PostOrder")
-// tree.postOrder()
+console.log("Level Order")
+tree.levelOrder()
+console.log("PreOrder")
+tree.preOrder()
+console.log("PostOrder")
+tree.postOrder()
 
 console.log("InOrder");
 tree.inOrder();
@@ -307,9 +307,9 @@ console.log("Kth Largest", tree.kthLargest(1));
 tree.printLastTwoLevel();
 console.log("sumOfLastTwoLevel :", tree.sumOfLastTwoLevel());
 
-// tree.deleteKthLargest(1)
-// tree.deleteSecondLargest()
-// tree.inOrder()
+tree.deleteKthLargest(1)
+tree.deleteSecondLargest()
+tree.inOrder()
 
 //         10
 //        /  \
