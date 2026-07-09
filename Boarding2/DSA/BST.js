@@ -274,6 +274,56 @@ class BST {
             ];
         }
     }
+    mirrorBST(node = this.root) {
+        if (!node) return;
+
+        let temp = node.left;
+        node.left = node.right;
+        node.right = temp;
+
+        this.mirrorBST(node.left);
+        this.mirrorBST(node.right);
+    }
+    PrintBetweenTwoValues(value1, value2) {
+        let count = 0;
+        let min = Math.min(value1, value2);
+        let max = Math.max(value1, value2);
+        function inOrder(node) {
+            if (!node) return;
+            inOrder(node.left);
+            if (node.data > min && node.data < max) {
+                console.log(node.data);
+            }
+            inOrder(node.right);
+        }
+        inOrder(this.root);
+    }
+    inOrderSuccessor(value) {
+        let node = this.root;
+        let successor = null;
+        while (node) {
+            if (value < node.data) {
+                successor = node;
+                node = node.left;
+            } else {
+                node = node.right;
+            }
+        }
+        return successor.data;
+    }
+    inOrderpredecessor(value) {
+        let node = this.root;
+        let predecessor = null;
+        while (node) {
+            if (value > node.data) {
+                predecessor = node;
+                node = node.right;
+            } else {
+                node = node.left;
+            }
+        }
+        return predecessor.data;
+    }
 
     levelOrder() {
         let queue = [];
@@ -351,14 +401,22 @@ console.log("Kth Largest", tree.kthLargest(1));
 tree.printLastTwoLevel();
 console.log("sumOfLastTwoLevel :", tree.sumOfLastTwoLevel());
 
-console.log("first three smallest")
-tree.firstThreeSmallest()
-console.log("last three smallest")
-tree.lastThreeSmallest()
+// console.log("first three smallest");
+// tree.firstThreeSmallest();
+// console.log("last three smallest");
+// tree.lastThreeSmallest();
 
-console.log('after swaping first with last three')
-tree.swapFirstThreeLastThree()
-tree.inOrder()
+// console.log("after swaping first with last three");
+// tree.swapFirstThreeLastThree();
+// tree.inOrder();
+
+// tree.mirrorBST();
+// tree.inOrder();
+
+// console.log("successor of 11 : ",tree.inOrderSuccessor(11))
+// console.log("predecessor of 11 : ",tree.inOrderpredecessor(11))
+
+tree.PrintBetweenTwoValues(8, 12);
 
 // tree.deleteKthLargest(1)
 // tree.deleteSecondLargest()
