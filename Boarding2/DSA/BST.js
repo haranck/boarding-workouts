@@ -339,6 +339,29 @@ class BST {
             }
         }
     }
+    BstToSortedArray() {
+        let arr = [];
+        function inorder(node) {
+            if (node) {
+                inorder(node.left);
+                arr.push(node.data);
+                inorder(node.right);
+            }
+        }
+        inorder(this.root);
+        return arr;
+    }
+    sortedArrayToBst(arr) {
+        this.root = null
+        const build = (left, right) => {
+            if (left > right) return;
+            let mid = Math.floor((left + right) / 2);
+            this.insert(arr[mid]);
+            build(left, mid - 1);
+            build(mid + 1, right);
+        };
+        build(0, arr.length - 1);
+    }
     postOrder(node = this.root) {
         if (node) {
             this.postOrder(node.left);
@@ -416,7 +439,17 @@ console.log("sumOfLastTwoLevel :", tree.sumOfLastTwoLevel());
 // console.log("successor of 11 : ",tree.inOrderSuccessor(11))
 // console.log("predecessor of 11 : ",tree.inOrderpredecessor(11))
 
-tree.PrintBetweenTwoValues(8, 12);
+// tree.PrintBetweenTwoValues(8, 12);
+
+// console.log('BSTtosortedarr', tree.BstToSortedArray())
+
+// const arr = [2, 5, 7, 10, 12, 15, 20];
+
+// const bst = new BST();
+
+// bst.sortedArrayToBst(arr);
+
+// bst.inOrder();
 
 // tree.deleteKthLargest(1)
 // tree.deleteSecondLargest()
