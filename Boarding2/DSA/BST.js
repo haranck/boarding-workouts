@@ -230,6 +230,50 @@ class BST {
             this.sumSpecificLevel(height - 1)
         );
     }
+    firstThreeSmallest(node = this.root) {
+        let count = 0;
+        function inorder(node) {
+            if (!node || count === 3) return;
+            inorder(node.left);
+            if (count < 3) {
+                console.log(node.data);
+                count++;
+            }
+            inorder(node.right);
+        }
+        inorder(this.root);
+    }
+    lastThreeSmallest(node = this.root) {
+        let count = 0;
+        function inorder(node) {
+            if (!node || count === 3) return;
+            inorder(node.right);
+            if (count < 3) {
+                console.log(node.data);
+                count++;
+            }
+            inorder(node.left);
+        }
+        inorder(this.root);
+    }
+    swapFirstThreeLastThree() {
+        let nodes = [];
+        function inorder(node) {
+            if (!node) return;
+            inorder(node.left);
+            nodes.push(node);
+            inorder(node.right);
+        }
+        inorder(this.root);
+        const n = nodes.length;
+
+        for (let i = 0; i < 3; i++) {
+            [nodes[i].data, nodes[n - 3 + i].data] = [
+                nodes[n - 3 + i].data,
+                nodes[i].data,
+            ];
+        }
+    }
 
     levelOrder() {
         let queue = [];
@@ -277,12 +321,12 @@ tree.insert(8);
 tree.insert(7);
 tree.insert(14);
 
-console.log("Level Order")
-tree.levelOrder()
-console.log("PreOrder")
-tree.preOrder()
-console.log("PostOrder")
-tree.postOrder()
+// console.log("Level Order")
+// tree.levelOrder()
+// console.log("PreOrder")
+// tree.preOrder()
+// console.log("PostOrder")
+// tree.postOrder()
 
 console.log("InOrder");
 tree.inOrder();
@@ -307,9 +351,18 @@ console.log("Kth Largest", tree.kthLargest(1));
 tree.printLastTwoLevel();
 console.log("sumOfLastTwoLevel :", tree.sumOfLastTwoLevel());
 
-tree.deleteKthLargest(1)
-tree.deleteSecondLargest()
+console.log("first three smallest")
+tree.firstThreeSmallest()
+console.log("last three smallest")
+tree.lastThreeSmallest()
+
+console.log('after swaping first with last three')
+tree.swapFirstThreeLastThree()
 tree.inOrder()
+
+// tree.deleteKthLargest(1)
+// tree.deleteSecondLargest()
+// tree.inOrder()
 
 //         10
 //        /  \
@@ -319,11 +372,10 @@ tree.inOrder()
 //    /            \
 //   7              14
 
-
 //if we want to remove duplicates from BST then we can use below function
 
 // function removeDuplicates(node){
-//     if(!node)return 
+//     if(!node)return
 //     removeDuplicates(node.left)
 //     if(prev!==node.val){
 //         console.log(node.val)
