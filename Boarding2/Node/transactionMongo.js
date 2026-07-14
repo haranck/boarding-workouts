@@ -37,7 +37,6 @@ async function transfermoney (senderName,recieverName,amount){
         await session.commitTransaction()
 
         console.log("transaction successfull")
- 
 
     } catch (error) {
         await session.abortTransaction()

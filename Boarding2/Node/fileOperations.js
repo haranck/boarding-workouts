@@ -13,12 +13,12 @@ fs.writeFile('input.txt','Heyy Dear',(err)=>{
     }
     console.log('file writed successfully')
 }) 
-// fs.writeFile('demo.txt','demo file',(err)=>{
-//     if(err){
-//         throw new Error
-//     }
-//     console.log('file writed successfully')
-// }) 
+fs.writeFile('demo.txt','demo file',(err)=>{
+    if(err){
+        throw new Error
+    }
+    console.log('file writed successfully')
+}) 
 
 fs.appendFile('input.txt',' Love you',(err)=>{
     if(err){
@@ -27,28 +27,35 @@ fs.appendFile('input.txt',' Love you',(err)=>{
     console.log('file appended')
 })
 
-// if(fs.existsSync('input.txt')){
-//     console.log('file exists')
-// }else{
-//     console.log('file not exist')
-// }
+fs.access("time.txt",fs.constants.R_OK,(err)=>{
+    if(err){
+        console.log(err)
+    }
+    console.log('file exisits')
+})
 
-// fs.rename('output.txt','input.txt',(err)=>{
-//     if(err){
-//         throw new Error(err)
-//     }
-//     console.log('file renamed')
-// })
+if(fs.existsSync('input.txt')){
+    console.log('file exists')
+}else{
+    console.log('file not exist')
+}
 
-// fs.unlink('demo.txt',(err)=>{
-//     if(err){
-//         throw new Error(err)
-//     }
-//     console.log('file deleted successfully')
-// })
+fs.rename('output.txt','input.txt',(err)=>{
+    if(err){
+        throw new Error(err)
+    }
+    console.log('file renamed')
+})
 
-// fs.link('input.txt','demo.txt',(err)=>{
-//     if(err) throw new Error(err)
-//     console.log("hard link created successfully")
-// })
+fs.unlink('demo.txt',(err)=>{
+    if(err){
+        throw new Error(err)
+    }
+    console.log('file deleted successfully')
+})
+
+fs.link('input.txt','demo.txt',(err)=>{
+    if(err) throw new Error(err)
+    console.log("hard link created successfully")
+})
 
