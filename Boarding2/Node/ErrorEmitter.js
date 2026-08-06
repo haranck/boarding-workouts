@@ -26,7 +26,7 @@ emitter.on("error", (error) => {
         },
     );
 
-    //decryption
+    // //decryption
 
     const decipher = crypto.createDecipheriv(algorithm, key, iv);
     const decrypted = decipher.update(encrypted, "hex", "utf8")+decipher.final('utf8')

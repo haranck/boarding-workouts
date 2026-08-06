@@ -2,7 +2,7 @@
 
 const express = require("express");
 const app = express();
-const fs = require('fs')
+const fs = require("fs");
 
 app.use((req, res, next) => {
     const now = new Date();
@@ -12,10 +12,10 @@ app.use((req, res, next) => {
     endTime.setHours(22, 0, 0, 0);
     if (now >= startTime && now <= endTime) {
         console.log(`[${now.toLocaleString()}] ${req.method} ${req.url}`);
-		fs.writeFile('test.txt',`${req.method} ${req.url}`,(err)=>{
-			if(err)throw new Error('error occuring while writing ..')
-			console.log('file writed successfully')
-		})
+        fs.writeFile("test.txt", `${req.method} ${req.url}`, (err) => {
+            if (err) throw new Error("error occuring while writing ..");
+            console.log("file writed successfully");
+        });
     } else {
         next();
     }
@@ -33,21 +33,24 @@ app.listen(3000, () => console.log("server running on Port 3000"));
 
 const express = require("express");
 const app = express();
-const fs = require('fs')
+const fs = require("fs");
 
 app.use((req, res, next) => {
-    const now = new Date()
-    const hour = now.getHours()
+    const now = new Date();
+    const hour = now.getHours();
 
-    if(hour >= 19 || hour <= 7){
-        fs.writeFile("time.txt",` Request Method : ${req.method } , Time : ${new Date()}`,(err)=>{
-            if(err)throw new Error("Something Went wrong")
-            console.log('file writed')
-        })
-    }else{
-        next()
+    if (hour >= 19 || hour <= 7) {
+        fs.writeFile(
+            "time.txt",
+            ` Request Method : ${req.method} , Time : ${new Date()}`,
+            (err) => {
+                if (err) throw new Error("Something Went wrong");
+                console.log("file writed");
+            },
+        );
+    } else {
+        next();
     }
-
 });
 
 app.get("/", (req, res) => {
@@ -71,9 +74,9 @@ end.setFullYear(end.getFullYear() + 1);
 app.use((req, res, next) => {
     let now = new Date();
     if (now >= start && now <= end) {
-        console.log("Request Blocked")
-    }else{
-        next()
+        console.log("Request Blocked");
+    } else {
+        next();
     }
 });
 
