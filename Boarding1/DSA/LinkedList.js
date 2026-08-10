@@ -377,3 +377,33 @@ ll.insert(40);
 
 console.log(ll.head.value);
 console.log(ll.tail.value);
+
+
+/*
+
+rotate list code 
+
+function rotate(head,k){
+    if(!head||!head.next||k===0){
+        return head
+    }
+    let tail = head
+    let length = 1
+    while(tail.next){
+        tail = tail.next
+        length++
+    }
+    k  = k%length
+    
+    let newTail = head
+    for(let i = 1;i<length-k;i++){
+        newTail = newTail.next
+    }
+    let newHead = newTail.next
+    newTail.next = null
+    tail.next = head
+    
+    return newHead
+}
+
+*/
