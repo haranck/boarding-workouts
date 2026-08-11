@@ -407,3 +407,75 @@ function rotate(head,k){
 }
 
 */
+
+/*
+Linked List Problem: Reverse Nodes in Groups of K
+
+input -> 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8  , k = 3
+
+output ->  3 → 2 → 1 → 6 → 5 → 4 → 7 → 8
+
+
+class ListNode{
+    constructor(value){
+        this.value = value
+        this.next = null
+    }
+}
+
+function print(node1){
+    let current = node1
+    while(current){
+        console.log(current.value)
+        current  = current.next
+    }
+}
+
+function reverse(head,k){
+    let count = 0
+    let current = head
+    while(current!==null&&count<k){
+        current = current.next
+        count++
+    }
+    if(count<k){
+        return head
+    }
+    
+    count = 0
+    current = head
+    let prev = null
+    while(current!==null&&count<k){
+        let nextNode = current.next
+        current.next = prev
+        prev = current
+        current = nextNode
+        count++
+    }
+    head.next = reverse(current,k)
+    return prev
+}
+
+
+const node1 = new ListNode(1)
+const node2 = new ListNode(2)
+const node3 = new ListNode(3)
+const node4 = new ListNode(4)
+const node5 = new ListNode(5)
+const node6 = new ListNode(6)
+const node7 = new ListNode(7)
+const node8 = new ListNode(8)
+
+node1.next = node2
+node2.next = node3
+node3.next = node4
+node4.next = node5
+node5.next = node6
+node6.next = node7
+node7.next = node8
+node8.next = null
+// print(node1)
+const newlist = reverse(node1,3)
+print(newlist)
+
+*/
