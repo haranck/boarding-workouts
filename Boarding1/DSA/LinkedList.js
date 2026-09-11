@@ -324,7 +324,7 @@ class LinkedList {
             curr = curr.next;
         }
     }
-    
+
     // Find the beginning of a cycle
     beginningOfCycle() {
         let slow = this.head;
@@ -388,6 +388,11 @@ console.log("first and last two sum ", ll.sumFirstLastTwo());
 ll.addPairsSumBetweenPairs();
 ll.print();
 // ll.isPowerOftWO()
+
+// ll.makeCircular()
+// let result = ll.beginningOfCycle()
+// console.log(result.value)
+
 ///////////////////////////////////////////
 
 //Find Head and tail in O(1) in a linkedlist
