@@ -23,4 +23,4 @@ function snakeTraversal(matrix) {
         leftToRight = !leftToRight;
     }
 }
-snakeTraversal(matrix);
+snakeTraversal(matrix); 

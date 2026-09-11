@@ -323,6 +323,28 @@ class LinkedList {
             console.log(res);
             curr = curr.next;
         }
+    } // Find the beginning of a cycle
+    beginningOfCycle() {
+        let slow = this.head;
+        let fast = this.head;
+        while (fast && fast.next) {
+            slow = slow.next;
+            fast = fast.next.next;
+            if (slow === fast) {
+                break;
+            }
+        }
+        slow = this.head;
+
+        if (!fast || !fast.next) {
+            return null;
+        }
+
+        while (fast !== slow) {
+            slow = slow.next;
+            fast = fast.next;
+        }
+        return slow;
     }
 
     print() {
