@@ -530,3 +530,4 @@ const newlist = reverse(node1,3)
 print(newlist)
 
 */
+console.log()
