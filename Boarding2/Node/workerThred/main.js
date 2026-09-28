@@ -20,7 +20,7 @@ app.get("/sum", (req, res) => {
     });
 });
 app.get("/", (req, res) => {
-    res.send("HOme page");
+    res.send("Home page");
 });
 
 app.listen(3000, () => console.log("server running on prot 3000"));

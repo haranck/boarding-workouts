@@ -1,61 +1,95 @@
-const fs  = require('fs')
+const fs = require("fs");
 
-fs.readFile('input.txt','utf-8',(err,data)=>{
-    if(err){
-        throw new Error(err)
+fs.readFile("time.txt", "utf-8", (err, data) => {
+    let arr = [];
+    if (err) {
+        console.log(err);
+        return;
     }
-    console.log(data)
-})
 
-fs.writeFile('input.txt','Heyy Dear',(err)=>{
-    if(err){
-        throw new Error
+    let names = data.split("\n");
+    let freq = {};
+
+    for (let name of names) {
+        freq[name] = (freq[name] || 0) + 1;
     }
-    console.log('file writed successfully')
-}) 
-fs.writeFile('demo.txt','demo file',(err)=>{
-    if(err){
-        throw new Error
+    for (let name in freq) {
+        if (freq[name] > 1) {
+            arr.push(name);
+        }
     }
-    console.log('file writed successfully')
-}) 
+    console.log(arr);
+    fs.writeFile("time.txt", arr.join("\n"), (err) => {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        console.log("file writed");
+        fs.copyFile("time.txt", "sample.txt", (err) => {
+            if (err) {
+                console.log(err);
+                return;
+            }
+            console.log("copied");
+        });
+    });
+});
 
-fs.appendFile('input.txt',' Love you',(err)=>{
-    if(err){
-        throw new Error(err)
-    }
-    console.log('file appended')
-})
+// fs.readFile('input.txt','utf-8',(err,data)=>{
+//     if(err){
+//         throw new Error(err)
+//     }
+//     console.log(data)
+// })
 
-fs.access("time.txt",fs.constants.R_OK,(err)=>{
-    if(err){
-        console.log(err)
-    }
-    console.log('file exisits')
-})
+// fs.writeFile('input.txt','Heyy Dear',(err)=>{
+//     if(err){
+//         throw new Error
+//     }
+//     console.log('file writed successfully')
+// })
+// fs.writeFile('demo.txt','demo file',(err)=>{
+//     if(err){
+//         throw new Error
+//     }
+//     console.log('file writed successfully')
+// })
 
-if(fs.existsSync('input.txt')){
-    console.log('file exists')
-}else{
-    console.log('file not exist')
-}
+// fs.appendFile('input.txt',' Love you',(err)=>{
+//     if(err){
+//         throw new Error(err)
+//     }
+//     console.log('file appended')
+// })
 
-fs.rename('output.txt','input.txt',(err)=>{
-    if(err){
-        throw new Error(err)
-    }
-    console.log('file renamed')
-})
+// fs.access("time.txt",fs.constants.R_OK,(err)=>{
+//     if(err){
+//         console.log(err)
+//     }
+//     console.log('file exisits')
+// })
 
-fs.unlink('demo.txt',(err)=>{
-    if(err){
-        throw new Error(err)
-    }
-    console.log('file deleted successfully')
-})
+// if(fs.existsSync('input.txt')){
+//     console.log('file exists')
+// }else{
+//     console.log('file not exist')
+// }
 
-fs.link('input.txt','demo.txt',(err)=>{
-    if(err) throw new Error(err)
-    console.log("hard link created successfully")
-})
+// fs.rename('output.txt','input.txt',(err)=>{
+//     if(err){
+//         throw new Error(err)
+//     }
+//     console.log('file renamed')
+// })
 
+// fs.unlink('demo.txt',(err)=>{
+//     if(err){
+//         throw new Error(err)
+//     }
+//     console.log('file deleted successfully')
+// })
+
+// fs.link('input.txt','demo.txt',(err)=>{
+//     if(err) throw new Error(err)
+//     console.log("hard link created successfully")
+// })

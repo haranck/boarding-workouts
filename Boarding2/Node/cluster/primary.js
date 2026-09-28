@@ -5,8 +5,8 @@ const express = require("express");
 if (cluster.isPrimary) {
     console.log(`primary PID : ${process.pid}`);
     const numCpus = os.cpus().length;
-
-    for (let i = 0; i < numCpus-8; i++) {
+    console.log("core ",numCpus)
+    for (let i = 0; i < numCpus-11; i++) {
         cluster.fork();
     }
 
@@ -26,6 +26,9 @@ if (cluster.isPrimary) {
         }
         res.send(`Handled by Worker : ${process.pid} | Sum: ${sum}`);
     });
+    app.get("/user",(req,res)=>{
+        res.send(`Handled by Worker : ${process.pid}`)
+    })
 
     app.listen(3000, () =>
         console.log(`App running on port 3000 | worker PID: ${process.pid}`),

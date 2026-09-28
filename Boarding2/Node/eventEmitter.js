@@ -1,0 +1,25 @@
+// const EventEmitter = require('node:events');
+// class MyEmitter extends EventEmitter {}
+// const myEmitter = new MyEmitter();
+// myEmitter.emit('error', new Error('whoops!'));
+// // Throws and crashes Node.js
+
+
+const EventEmitter = require('node:events');
+class MyEmitter extends EventEmitter {}
+
+const myEmitter = new MyEmitter();
+// // Only do this once so we don't loop forever
+// myEmitter.once('newListener', (event, listener) => {
+//   if (event === 'event') {
+//     // Insert a new listener in front
+//     myEmitter.on('event', () => {
+//       console.log('B');
+//     });
+//   }
+// });
+myEmitter.on('event', () => {
+  console.log('A');
+});
+myEmitter.emit('event');
+console.log('sadf')
