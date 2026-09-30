@@ -5,7 +5,7 @@ const express = require("express");
 if (cluster.isPrimary) {
     console.log(`primary PID : ${process.pid}`);
     const numCpus = os.cpus().length;
-    console.log("core ",numCpus)
+    
     for (let i = 0; i < numCpus-11; i++) {
         cluster.fork();
     }

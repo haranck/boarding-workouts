@@ -35,6 +35,7 @@ fs.readFile("time.txt", "utf-8", (err, data) => {
     });
 });
 
+
 // fs.readFile('input.txt','utf-8',(err,data)=>{
 //     if(err){
 //         throw new Error(err)

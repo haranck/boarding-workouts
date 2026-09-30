@@ -15,11 +15,17 @@ function processUserData(name) {
         res(name);
     });
 }
-
+ 
 function displayUserData(user) {
     return new Promise((res, rej) => {
-        console.log(`User ${user} data processed successfully.`);
+        // console.log(`User ${user} data processed successfully.`);
+        res (`User ${user} data processed successfully.`)
     });
 }
 
-processUserData("Haran").then((user) => displayUserData(user));
+processUserData("Haran")
+    .then((user)=>{
+        return displayUserData(user)
+    })
+    .then((result)=> console.log(result))
+
