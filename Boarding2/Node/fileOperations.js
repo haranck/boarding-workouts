@@ -32,6 +32,13 @@ fs.readFile("time.txt", "utf-8", (err, data) => {
             }
             console.log("copied");
         });
+        fs.link("time.txt","link.txt",(err)=>{
+            if(err){
+                console.log(err)
+                return
+            }
+            console.log("linking done")
+        })
     });
 });
 
