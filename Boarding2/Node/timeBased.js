@@ -31,13 +31,13 @@ app.listen(3000, () => console.log("server running on Port 3000"));
 
 // block 7Pm  to nextDay 7AM request and write the req.method to a file
 
+
 const express = require("express");
 const app = express();
 const fs = require("fs");
 
 app.use((req, res, next) => {
-    const now = new Date();
-    const hour = now.getHours();
+    const hour = new Date().getHours();
 
     if (hour >= 19 || hour <= 7) {
         fs.writeFile(
@@ -67,21 +67,22 @@ const express = require("express");
 const app = express();
 const fs = require("fs");
 
-const start = new Date();
-let end = new Date();
-end.setFullYear(end.getFullYear() + 1);
+let endTime = new Date()
+endTime.setFullYear(endTime.getFullYear()+1)
 
-app.use((req, res, next) => {
-    let now = new Date();
-    if (now >= start && now <= end) {
-        console.log("Request Blocked");
-    } else {
-        next();
+
+app.use((req,res,next)=>{
+    let now  = new Date()
+    if(now <= endTime ){
+        console.log("req block ")
+        res.json({success:false,error:"request Hacked"})
+    }else{
+        next()
     }
-});
-
+})
+ 
 app.get("/", (req, res) => {
-    res.json({ message: "Helllo" });
+    res.send("helloo");
 });
 
-app.listen(3000, () => console.log("server running on port 3000"));
+app.listen(5000, () => console.log("server running or port 3000")); 
