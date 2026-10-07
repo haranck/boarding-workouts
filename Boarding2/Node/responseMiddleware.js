@@ -26,5 +26,7 @@ app.get("/user", (req, res) => {
 	console.log(JSON.parse(user))
     res.json(user);
 });
+router.route("/chain")
+.get((req,res)=>console.log)
 
 app.listen(3000, () => console.log("server running on 3000"));
