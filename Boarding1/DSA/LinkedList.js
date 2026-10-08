@@ -348,6 +348,17 @@ class LinkedList {
         }
         return slow;
     }
+    replaceWithSum() {
+        let current = this.head;
+        while (current && current.next && current.next.next) {
+            let sum = current.value + current.next.next.value;
+            let node = new Node(sum);
+
+            node.next = current.next.next;
+            current.next = node;
+            current = node.next.next;
+        }
+    }
 
     print() {
         let current = this.head;
@@ -392,6 +403,7 @@ ll.print();
 // ll.makeCircular()
 // let result = ll.beginningOfCycle()
 // console.log(result.value)
+ll.replaceWithSum()
 
 ///////////////////////////////////////////
 
@@ -430,34 +442,30 @@ ll.print();
 // console.log(ll.head.value);
 // console.log(ll.tail.value);
 
-/*
+// rotate list code
 
-rotate list code 
+function rotate(head, k) {
+    if (!head || !head.next || k === 0) {
+        return head;
+    }
+    let tail = head;
+    let length = 1;
+    while (tail.next) {
+        tail = tail.next;
+        length++;
+    }
+    k = k % length;
 
-function rotate(head,k){
-    if(!head||!head.next||k===0){
-        return head
+    let newTail = head;
+    for (let i = 1; i < length - k; i++) {
+        newTail = newTail.next;
     }
-    let tail = head
-    let length = 1
-    while(tail.next){
-        tail = tail.next
-        length++
-    }
-    k  = k%length
-    
-    let newTail = head
-    for(let i = 1;i<length-k;i++){
-        newTail = newTail.next
-    }
-    let newHead = newTail.next
-    newTail.next = null
-    tail.next = head
-    
-    return newHead
+    let newHead = newTail.next;
+    newTail.next = null;
+    tail.next = head;
+
+    return newHead;
 }
-
-*/
 
 /*
 Linked List Problem: Reverse Nodes in Groups of K
