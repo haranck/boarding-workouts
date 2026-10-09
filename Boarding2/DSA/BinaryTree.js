@@ -48,46 +48,44 @@ class BinaryTree {
             }
         }
     }
-    insertBST(node, value) {
-        if (!node) return new TreeNode(value);
-
-        if (node.data > value) {
-            node.left = this.insertBST(node.left, value);
-        } else {
-            node.right = this.insertBST(node.right, value);
+    convertToBST(){
+        let values = []
+        function inOrder(node){
+            if(node){
+                inOrder(node.left)
+                values.push(node.data)
+                inOrder(node.right)
+            }
         }
-        return node;
-    }
-    toBST() {
-        let bst = new BinaryTree();
-        let queue = [this.root];
-
-        while (queue.length) {
-            let current = queue.shift();
-
-            bst.root = this.insertBST(bst.root, current.data);
-
-            if (current.left) queue.push(current.left);
-            if (current.right) queue.push(current.right);
+        inOrder(this.root)
+        values.sort((a,b)=>a-b)
+        console.log(values)
+        let index = 0
+        function createbst(node){
+            if(node){
+                createbst(node.left)
+                node.data = values[index]
+                index++
+                createbst(node.right) 
+            }
         }
-        return bst;
+        createbst(this.root)
     }
 }
 
 const tree = new BinaryTree();
 
-tree.insert(1);
-tree.insert(2);
-tree.insert(3);
-tree.insert(4);
 tree.insert(5);
+tree.insert(1);
+tree.insert(3);
+tree.insert(2);
 tree.insert(6);
+tree.insert(4);
 tree.insert(7);
 
 console.log("Binary Tree");
 tree.levelOrder();
 
 console.log("BST");
-const bst = tree.toBST();
-bst.levelOrder();
+tree.convertToBST()
 ////////

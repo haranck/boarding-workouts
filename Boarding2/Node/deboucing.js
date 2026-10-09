@@ -28,7 +28,7 @@
 
 function throttling(fn,delay){
     let lastCall = 0
-
+ 
     return (...args)=>{
         let now  = Date.now()
         if(now - lastCall >= delay){

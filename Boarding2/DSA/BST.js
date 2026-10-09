@@ -360,7 +360,7 @@ class BST {
             build(left, mid - 1);
             build(mid + 1, right);
         };
-        build(0, arr.length - 1);
+        build(0, arr.length - 1); 
     }
     postOrder(node = this.root) {
         if (node) {
