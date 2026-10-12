@@ -70,7 +70,7 @@ class Graph {
             clone.addVertex(vertex);
             for (let neighbour of this.adjacencyList[vertex]) {
                 clone.addVertex(neighbour);
-                clone.addEdge(vertex,neighbour);
+                clone.addEdge(vertex, neighbour);
                 if (!visited.has(neighbour)) {
                     dfs(neighbour);
                 }
@@ -108,22 +108,53 @@ class Graph {
         }
         return false;
     }
-    shortestPath(start,target){
-		let visited = new Set()
-		let queue = [[start,[start]]]
-		while(queue.length){
-			let [vertex,path] = queue.shift()
-			if(vertex===target){
-				return path
-			}
-			for(let neighbour of this.adjacencyList[vertex]){
-				if(!visited.has(neighbour)){
-					queue.push([neighbour,[...path,neighbour]])
-					visited.add(neighbour)
-				}
-			}
-		}
-	}
+    detectCycleAndPrint(vertex, visited, parent, path) {
+        visited.add(vertex);
+        path.push(vertex);
+
+        for (let neighbour of this.adjacencyList[vertex]) {
+            if (!visited.has(neighbour)) {
+                if (this.detectCycleAndPrint(neighbour, visited, vertex, path)) {
+                    return true;
+                }
+            } else if (neighbour !== parent) {
+                console.log("Cycle:", [...path, neighbour].join(" -> "));
+                return true;
+            }
+        }
+
+        path.pop();
+        return false;
+    }
+    printCycle() {
+        let visited = new Set();
+
+        for (let vertex in this.adjacencyList) {
+            if (!visited.has(vertex)) {
+                if (this.detectCycleAndPrint(vertex, visited, null, [])) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+    shortestPath(start, target) {
+        let visited = new Set();
+        let queue = [[start, [start]]];
+        while (queue.length) {
+            let [vertex, path] = queue.shift();
+            if (vertex === target) {
+                return path;
+            }
+            for (let neighbour of this.adjacencyList[vertex]) {
+                if (!visited.has(neighbour)) {
+                    queue.push([neighbour, [...path, neighbour]]);
+                    visited.add(neighbour);
+                }
+            }
+        }
+    }
 }
 
 const g = new Graph();
@@ -145,14 +176,16 @@ g.bfs("A");
 console.log("clone graph");
 const cloneGraph = g.clone();
 // cloneGraph.print();
-cloneGraph.dfs("A")
+cloneGraph.dfs("A");
 
 console.log("has Cycle ? : ", g.hasCycle());
 
 console.log(g.adjacencyList);
 
-// console.log('hasEdge ',g.hasEdge("A","B"))
+console.log("hasEdge ", g.hasEdge("A", "B"));
 
 g.print();
 
-console.log("shortest Path ",g.shortestPath("A","D"))
+console.log("shortest Path ", g.shortestPath("A", "D"));
+console.log("has cycle ",g.hasCycle());
+console.log("cycle ", g.printCycle());
