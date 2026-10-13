@@ -188,4 +188,4 @@ g.print();
 
 console.log("shortest Path ", g.shortestPath("A", "D"));
 console.log("has cycle ",g.hasCycle());
-console.log("cycle ", g.printCycle());
+console.log(g.printCycle());
