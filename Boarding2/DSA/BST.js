@@ -284,6 +284,12 @@ class BST {
         this.mirrorBST(node.left);
         this.mirrorBST(node.right);
     }
+    withOneChild(node = this.root) {
+        if (!node) return 0;
+
+        if ((!node.left && node.right) || (node.left && !node.right)) return 1;
+        return this.withOneChild(node.left) + this.withOneChild(node.right);
+    }
     PrintBetweenTwoValues(value1, value2) {
         let count = 0;
         let min = Math.min(value1, value2);
@@ -339,6 +345,30 @@ class BST {
             }
         }
     }
+    isIdentical(node1,node2){
+        if(!node1&&!node2) return false
+        if(!node1.left||!node2.right) return false
+        if(!node1.data !== !node2.data)return false
+        return (
+            this.isIdentical(node1.left,node2.left)&&
+            this.isIdentical(node1.right,node2.right)
+        )
+    }
+    removeDuplicates(node= this.root){
+        let values = new Set()
+        function inOrder(node){
+            if(node){
+                inOrder(node.left)
+                values.add(node.data)
+                inOrder(node.right)
+            }
+        }
+        inOrder(this.root)
+        this.root = null
+        for(let value of values){
+            this.insert(value)
+        }
+    }
     BstToSortedArray() {
         let arr = [];
         function inorder(node) {
@@ -352,15 +382,17 @@ class BST {
         return arr;
     }
     sortedArrayToBst(arr) {
-        this.root = null
-        const build = (left, right) => {
-            if (left > right) return;
-            let mid = Math.floor((left + right) / 2);
-            this.insert(arr[mid]);
-            build(left, mid - 1);
-            build(mid + 1, right);
-        };
-        build(0, arr.length - 1); 
+        function build(left,right) {
+            if(left > right) return null
+            let mid = Math.floor((left+right)/2)
+            let node = new Node(arr[mid])
+            
+            node.left = build(left,mid-1)
+            node.right = build(mid+1,right)
+
+            return node
+        }
+        this.root = build(0,arr.length -1)
     }
     postOrder(node = this.root) {
         if (node) {
@@ -420,36 +452,37 @@ console.log("Valid BST:", tree.isValidBST());
 console.log("Perfect Tree:", tree.isPerfect());
 console.log("Kth Smallest", tree.kthSmallest(1));
 console.log("Kth Largest", tree.kthLargest(1));
-
+console.log("With One child ",tree.withOneChild())
 tree.printLastTwoLevel();
 console.log("sumOfLastTwoLevel :", tree.sumOfLastTwoLevel());
 
-// console.log("first three smallest");
-// tree.firstThreeSmallest();
-// console.log("last three smallest");
-// tree.lastThreeSmallest();
+console.log("first three smallest");
+tree.firstThreeSmallest();
+console.log("last three smallest");
+tree.lastThreeSmallest();
 
-// console.log("after swaping first with last three");
-// tree.swapFirstThreeLastThree();
-// tree.inOrder();
+console.log("after swaping first with last three");
+tree.swapFirstThreeLastThree();
+tree.inOrder();
 
-// tree.mirrorBST();
-// tree.inOrder();
+tree.mirrorBST();
+tree.inOrder();
 
-// console.log("successor of 11 : ",tree.inOrderSuccessor(11))
-// console.log("predecessor of 11 : ",tree.inOrderpredecessor(11))
+console.log("successor of 11 : ",tree.inOrderSuccessor(11))
+console.log("predecessor of 11 : ",tree.inOrderpredecessor(11))
 
-// tree.PrintBetweenTwoValues(8, 12);
+tree.PrintBetweenTwoValues(8, 12);
 
-// console.log('BSTtosortedarr', tree.BstToSortedArray())
+console.log('BSTtosortedarr', tree.BstToSortedArray())
 
-// const arr = [2, 5, 7, 10, 12, 15, 20];
+const arr = [2, 5, 7, 10, 12, 15, 20];
 
-// const bst = new BST();
+const bst = new BST();
 
-// bst.sortedArrayToBst(arr);
+bst.sortedArrayToBst(arr);
+console.log('arr to bst')
+bst.inOrder();
 
-// bst.inOrder();
 
 // tree.deleteKthLargest(1)
 // tree.deleteSecondLargest()
@@ -475,3 +508,4 @@ console.log("sumOfLastTwoLevel :", tree.sumOfLastTwoLevel());
 //     removeDuplicates(node.right)
 // }
 // removeDuplicates(root)
+

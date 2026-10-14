@@ -367,6 +367,15 @@ class LinkedList {
             current = current.next;
         }
     }
+    printReverse(node = this.head) {
+        if (node === null) {
+            return;
+        }
+
+        this.printReverse(node.next);
+
+        console.log(node.value);
+    }
 }
 
 const ll = new LinkedList();
@@ -403,7 +412,8 @@ ll.print();
 // ll.makeCircular()
 // let result = ll.beginningOfCycle()
 // console.log(result.value)
-ll.replaceWithSum()
+ll.replaceWithSum();
+ll.printReverseRecursion()
 
 ///////////////////////////////////////////
 
