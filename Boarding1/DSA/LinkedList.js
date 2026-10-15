@@ -359,7 +359,37 @@ class LinkedList {
             current = node.next.next;
         }
     }
+    swapAdjacent() {
+        let dummy = new Node(0);
+        dummy.next = this.head;
 
+        let prev = dummy;
+        while (prev.next && prev.next.next) {
+            let first = prev.next;
+            let second = first.next;
+
+            first.next = second.next;
+            second.next = first;
+            prev.next = second;
+
+            prev = first;
+        }
+        this.head = dummy.next;
+    }
+    swaptFirstLast() {
+        if (!this.head) return;
+        let prev = null;
+        let current = this.head;
+        while (current.next) {
+            prev = current;
+            current = current.next;
+        }
+
+        prev.next = this.head;
+        current.next = this.head.next;
+        this.head.next = null;
+        this.head = current;
+    }
     print() {
         let current = this.head;
         while (current) {
@@ -427,6 +457,9 @@ console.log();
 ll.replaceWithSum();
 ll.print();
 // ll.printReverseRecursion()
+ll.swapAdjacent();
+// ll.swaptFirstLast()
+ll.print();
 
 ///////////////////////////////////////////
 
