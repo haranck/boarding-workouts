@@ -401,9 +401,7 @@ class LinkedList {
         if (node === null) {
             return;
         }
-
         this.printReverse(node.next);
-
         console.log(node.value);
     }
     reversefirsthalf() {

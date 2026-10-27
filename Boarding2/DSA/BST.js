@@ -481,8 +481,7 @@ const bst = new BST();
 
 bst.sortedArrayToBst(arr);
 console.log('arr to bst')
-bst.inOrder();
-
+bst.inOrder();  
 
 // tree.deleteKthLargest(1)
 // tree.deleteSecondLargest()
