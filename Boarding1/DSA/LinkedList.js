@@ -375,7 +375,7 @@ class LinkedList {
             prev = first;
         }
         this.head = dummy.next;
-    }
+    } 
     swaptFirstLast() {
         if (!this.head) return;
         let prev = null;
