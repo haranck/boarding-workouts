@@ -1,27 +1,27 @@
 //debouncing
 
-// function debounce(fn, delay) {
-//     let timer = 0;
+function debounce(fn, delay) {
+    let timer = 0;
 
-//     return (...args) => {
-//         clearTimeout(timer);
-//         timer = setTimeout(() => {
-//             fn(...args);
-//         }, delay);
-//     };
-// }
+    return (...args) => {
+        clearTimeout(timer);
+        timer = setTimeout(() => {
+            fn(...args);
+        }, delay);
+    };
+}
 
-// function SearchUser(name) {
-//     console.log(`Searching ${name}`);
-// }
+function SearchUser(name) {
+    console.log(`Searching ${name}`);
+}
 
-// const debounceFunction = debounce(SearchUser, 500);
+const debounceFunction = debounce(SearchUser, 500);
 
-// debounceFunction("H");
-// debounceFunction("Ha");
-// debounceFunction("Har");
-// debounceFunction("Hara");
-// debounceFunction("Haran");
+debounceFunction("H");
+debounceFunction("Ha");
+debounceFunction("Har");
+debounceFunction("Hara");
+debounceFunction("Haran");
 
 
 //throttling
